@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photos of Us - Dedicated to you, Asmita.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-50: #fdf2f8;
+      --pink-100: #fce7f3;
+      --pink-200: #fbcfe8;
+      --pink-300: #f9a8d4;
+      --pink-400: #f472b6;
+      --pink-500: #ec4899;
+      --pink-600: #db2777;
+      --rose-gold: #b76e79;
+      --cream: #fffbf7;
+      --text-dark: #4a3240;
+      --text-light: #7c6873;
+      font-family: "Quicksand", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--pink-50) 0%, var(--cream) 50%, var(--pink-100) 100%);
+      color: var(--text-dark);
+    }
+
+    /* Navigation */
+    .nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 30px rgba(236, 72, 153, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(244, 114, 182, 0.2);
+    }
+
+    .nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+    }
+
+    .nav a:hover {
+      color: var(--pink-500);
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.1));
+      transform: translateY(-2px);
+    }
+
+    .nav a.active {
+      color: white;
+      background: linear-gradient(135deg, var(--pink-400), var(--pink-500));
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    /* Main Layout */
+    .page-wrapper {
+      display: flex;
+      min-height: calc(100vh - 70px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 320px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(253, 242, 248, 0.95));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(244, 114, 182, 0.2);
+      padding: 0;
+      position: fixed;
+      left: 0;
+      top: 70px;
+      height: calc(100vh - 70px);
+      z-index: 90;
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(244, 114, 182, 0.15);
+      background: linear-gradient(135deg, var(--pink-100), var(--pink-50));
+    }
+
+    .sidebar-header h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      color: var(--pink-600);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .sidebar-header h2::before {
+      content: "♪";
+      font-size: 1.2rem;
+    }
+
+    .close-sidebar {
+      background: rgba(244, 114, 182, 0.1);
+      border: none;
+      font-size: 1.5rem;
+      color: var(--pink-500);
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-sidebar:hover {
+      background: var(--pink-500);
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .playlist {
+      flex: 1;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      overflow-y: auto;
+    }
+
+    .track-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+      border: 1px solid rgba(244, 114, 182, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .track-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(236, 72, 153, 0.2);
+    }
+
+    .track-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .track-name::before {
+      content: "💗";
+      font-size: 0.9rem;
+    }
+
+    .track {
+      width: 100%;
+      border-radius: 30px;
+      height: 40px;
+    }
+
+    /* Sidebar Toggle Button */
+    .sidebar-toggle {
+      position: fixed;
+      left: 1rem;
+      bottom: 2rem;
+      z-index: 95;
+      background: linear-gradient(135deg, var(--pink-400), var(--pink-500));
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(236, 72, 153, 0.5);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(236, 72, 153, 0.6);
+    }
+
+    .sidebar-toggle.active {
+      background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(236, 72, 153, 0.15);
+      border: 1px solid rgba(244, 114, 182, 0.2);
+    }
+
+    .album-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--pink-100), var(--pink-50));
+      border: 2px solid rgba(244, 114, 182, 0.2);
+      border-radius: 50%;
+      color: var(--pink-500);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(135deg, var(--pink-400), var(--pink-500));
+      color: white;
+      transform: translateX(-3px);
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+    }
+
+    .page-description {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    /* Masonry Gallery */
+    .gallery {
+      column-count: 3;
+      column-gap: 1.5rem;
+    }
+
+    .photo-card {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--pink-50), white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(236, 72, 153, 0.12);
+      border: 2px solid rgba(244, 114, 182, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .photo-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 60px rgba(236, 72, 153, 0.2);
+      border-color: var(--pink-300);
+    }
+
+    .photo-card img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-card .image-container {
+      overflow: hidden;
+    }
+
+    /* Decorative Elements */
+    .decoration {
+      position: fixed;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .decoration-1 {
+      top: 20%;
+      right: 5%;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.15), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .decoration-2 {
+      bottom: 30%;
+      right: 15%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.1), transparent 70%);
+      border-radius: 50%;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+      }
+
+      .nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .main-content {
+        padding: 1.5rem;
+      }
+
+      .content-card {
+        padding: 2rem;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .gallery {
+        column-count: 1;
+      }
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      background: var(--pink-500);
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="decoration decoration-1"></div>
+  <div class="decoration decoration-2"></div>
+
+  <nav class="nav">
+    <a href="home.html">Home</a>
+    <a href="manifesto.html">Manifesto</a>
+    <a href="albums.html" class="active">Albums</a>
+    <a href="games.html">Games</a>
+  </nav>
+
+  <div class="page-wrapper">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Music Player</h2>
+        <button class="close-sidebar" id="close-sidebar">×</button>
+      </div>
+      <div class="playlist">
+        <div class="track-card">
+          <div class="track-name">Baby Come Back</div>
+          <audio class="track" controls preload="metadata">
+            <source src="assets/audio/Player%20-%20Baby%20Come%20Back.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="track-card">
+          <div class="track-name">When I Was Your Man</div>
+          <audio class="track" controls preload="metadata">
+            <source src="assets/audio/Bruno%20Mars%20-%20When%20I%20Was%20Your%20Man%20(Official%20Music%20Video).mp3" type="audio/mpeg">
+          </audio>
+        </div>
+        <div class="track-card">
+          <div class="track-name">Mirrors</div>
+          <audio class="track" controls preload="metadata">
+            <source src="assets/audio/Justin%20Timberlake%20-%20Mirrors%20(Official%20Video).mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="content-card">
+        <div class="album-header">
+          <a href="albums.html" class="back-btn">←</a>
+          <h1>Photos of Us</h1>
+        </div>
+        <p class="page-description">
+          A collection of our favorite moments together, each photo a precious memory that tells our story. 💑✨
+        </p>
+        
+        <div class="gallery">
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/984BEF01-2334-4D09-8527-65160FF53E4C.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/DSCN2337.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/DSCN2434.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_0245.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_0450.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_0758.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_0768.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_0777.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_1162.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_1163.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_1177.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_1449.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_1725.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_1775.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_2050.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_2437.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5296.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5721.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5844.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5912.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5923.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5933.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_5987.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6018.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6372.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6502.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6576.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6601.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6819.JPG" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6820.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_6856.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7101.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7151.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7209.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7213.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7309.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7461.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7502.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7825.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_7915.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_8019.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_8103.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_8125.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_8418.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_8883.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_8937.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_9055.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_9101.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_9455.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_9899.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+          
+          <figure class="photo-card" onclick="openLightbox(this)">
+            <div class="image-container">
+              <img src="Pictures%20of%20us/jpg/IMG_9913.jpg" alt="Our memory" loading="lazy">
+            </div>
+          </figure>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <button class="sidebar-toggle" id="sidebar-toggle">🎵</button>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <img src="" alt="Full size photo" id="lightbox-img">
+  </div>
+
+  <script>
+    // Music player - only one plays at a time
+    const players = Array.from(document.querySelectorAll('.track'));
+    players.forEach((player) => {
+      player.addEventListener('play', () => {
+        players.forEach((other) => {
+          if (other !== player && !other.paused) {
+            other.pause();
+          }
+        });
+      });
+    });
+
+    // Sidebar toggle
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      sidebarToggle.classList.toggle('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      sidebarToggle.classList.remove('active');
+    });
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        sidebarToggle.classList.remove('active');
+      }
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    function openLightbox(card) {
+      const img = card.querySelector('img');
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close lightbox on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+    // Close lightbox on background click
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

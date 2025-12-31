@@ -4,96 +4,198 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dedicated to you, Asmita.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      color-scheme: light;
-      font-family: "Helvetica Neue", Arial, sans-serif;
+      --pink-50: #fdf2f8;
+      --pink-100: #fce7f3;
+      --pink-200: #fbcfe8;
+      --pink-300: #f9a8d4;
+      --pink-400: #f472b6;
+      --pink-500: #ec4899;
+      --pink-600: #db2777;
+      --pink-700: #be185d;
+      --cream: #fffbf7;
+      --text-dark: #4a3240;
+      --text-light: #7c6873;
+      font-family: "Quicksand", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 2rem 1.5rem;
-      background: radial-gradient(circle at top, #ffe0ec 0%, #fef9fb 45%, #faf4f8 100%);
-      color: #333;
+      background: linear-gradient(135deg, var(--pink-100) 0%, var(--cream) 40%, var(--pink-50) 100%);
+      color: var(--text-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Floating decorations */
+    .decoration {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .decoration-1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.2), transparent 70%);
+      top: -100px;
+      right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .decoration-2 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.15), transparent 70%);
+      bottom: -50px;
+      left: -50px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .decoration-3 {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(249, 168, 212, 0.25), transparent 70%);
+      top: 30%;
+      left: 10%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .decoration-4 {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(219, 39, 119, 0.1), transparent 70%);
+      bottom: 20%;
+      right: 10%;
+      animation: float 7s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
     }
 
     .card {
-      width: min(540px, 92vw);
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 24px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
-      padding: 3rem clamp(1.8rem, 5vw, 3rem);
+      position: relative;
+      z-index: 1;
+      width: min(480px, 92vw);
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 32px;
+      box-shadow: 0 25px 80px rgba(236, 72, 153, 0.2);
+      padding: 3.5rem clamp(2rem, 5vw, 3rem);
       text-align: center;
-      backdrop-filter: blur(6px);
+      border: 2px solid rgba(244, 114, 182, 0.2);
+    }
+
+    .heart-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     h1 {
-      margin: 0 0 1.5rem;
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
-      letter-spacing: 0.05em;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
     }
 
     .hint {
-      color: #666;
-      margin-bottom: 2.25rem;
-      line-height: 1.6;
+      color: var(--text-light);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      font-size: 1rem;
     }
 
     .hint strong {
-      color: #ff7aa4;
+      color: var(--pink-500);
       font-weight: 700;
+      background: linear-gradient(135deg, var(--pink-100), var(--pink-50));
+      padding: 0.25rem 0.75rem;
+      border-radius: 8px;
     }
 
     form {
       display: grid;
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
     .input-group {
       display: grid;
       grid-template-columns: 1fr max-content;
       align-items: center;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(244, 114, 182, 0.2);
+      border-radius: 16px;
       overflow: hidden;
-      transition: border 0.15s ease, box-shadow 0.15s ease;
+      transition: all 0.3s ease;
     }
 
     .input-group:focus-within {
-      border-color: #ff9bbb;
-      box-shadow: 0 0 0 3px rgba(255, 154, 187, 0.25);
+      border-color: var(--pink-400);
+      box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
     }
 
     input {
-      padding: 0.9rem 1.1rem;
+      padding: 1.1rem 1.25rem;
       border: none;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       text-align: center;
-      letter-spacing: 0.18em;
-      font-weight: 600;
+      letter-spacing: 0.25em;
+      font-weight: 700;
+      font-family: "Quicksand", sans-serif;
+      color: var(--text-dark);
       outline: none;
       background: transparent;
+    }
+
+    input::placeholder {
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
     }
 
     .toggle {
       cursor: pointer;
       border: none;
       background: transparent;
-      padding: 0.85rem 1.1rem;
+      padding: 1rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #888;
-      transition: color 0.2s ease;
+      color: var(--text-light);
+      transition: color 0.3s ease;
     }
 
     .toggle:hover {
-      color: #ff7aa4;
+      color: var(--pink-500);
     }
 
     .toggle svg {
@@ -101,37 +203,77 @@
       height: 24px;
     }
 
-    button {
+    button[type="submit"] {
       cursor: pointer;
       border: none;
-      padding: 0.95rem;
-      border-radius: 999px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      background: linear-gradient(135deg, #ff7aa4, #ff97b9);
-      color: #fff7fc;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 12px 28px rgba(255, 122, 164, 0.35);
+      padding: 1.1rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: "Quicksand", sans-serif;
+      background: linear-gradient(135deg, var(--pink-400), var(--pink-500));
+      color: white;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
     }
 
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 36px rgba(255, 122, 164, 0.45);
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px rgba(236, 72, 153, 0.5);
+      background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(-1px);
     }
 
     .message {
-      min-height: 1.2rem;
+      min-height: 1.5rem;
       font-size: 0.95rem;
-      color: #d84c69;
+      color: var(--pink-600);
+      font-weight: 600;
+    }
+
+    .footer-text {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .card {
+        padding: 2.5rem 1.75rem;
+      }
+
+      .heart-icon {
+        font-size: 2.5rem;
+      }
+
+      input {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      button[type="submit"] {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="decoration decoration-1"></div>
+  <div class="decoration decoration-2"></div>
+  <div class="decoration decoration-3"></div>
+  <div class="decoration decoration-4"></div>
+
   <section class="card">
+    <span class="heart-icon">💕</span>
     <h1>Dedicated to you, Asmita.</h1>
     <p class="hint">
       Hint: The day we became official.<br>
-      Please format it like this: <strong>02/10/2003 → 02102003</strong>
+      Format it like this: <strong>02/10/2003 → 02102003</strong>
     </p>
     <form id="access-form" novalidate>
       <div class="input-group">
@@ -140,7 +282,7 @@
           type="password"
           inputmode="numeric"
           autocomplete="off"
-          placeholder="Enter the secret"
+          placeholder="Enter our special date"
           aria-label="Enter password"
           required
         >
@@ -151,15 +293,16 @@
           aria-label="Show password"
           aria-pressed="false"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M1.5 12s3.5-7 10.5-7 10.5 7 10.5 7-3.5 7-10.5 7-10.5-7-10.5-7z"></path>
             <circle cx="12" cy="12" r="3.5"></circle>
           </svg>
         </button>
       </div>
-      <button type="submit">Open our memories</button>
+      <button type="submit">Open Our Memories ✨</button>
       <div id="message" class="message"></div>
     </form>
+    <p class="footer-text">Made with 💗 just for you</p>
   </section>
 
   <script>
@@ -172,10 +315,20 @@
       const value = passwordInput.value.trim();
 
       if (value === '19122023') {
-        window.location.href = 'home.html';
+        // Add a small animation before redirecting
+        document.querySelector('.card').style.transform = 'scale(0.95)';
+        document.querySelector('.card').style.opacity = '0';
+        setTimeout(() => {
+          window.location.href = 'home.html';
+        }, 300);
       } else {
-        message.textContent = 'That does not feel like the right date. Try again?';
+        message.textContent = 'That doesn\'t feel right... Try again? 💭';
         passwordInput.focus();
+        // Shake animation
+        document.querySelector('.input-group').style.animation = 'shake 0.5s ease';
+        setTimeout(() => {
+          document.querySelector('.input-group').style.animation = '';
+        }, 500);
       }
     });
 
@@ -187,7 +340,17 @@
       toggleButton.setAttribute('aria-pressed', String(isPassword));
       toggleButton.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
     });
+
+    // Add shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-8px); }
+        75% { transform: translateX(8px); }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 </html>
-
