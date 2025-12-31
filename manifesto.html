@@ -283,6 +283,63 @@
       margin-bottom: 0;
     }
 
+    /* Letter pagination (Previous / Next) */
+    .letter-pagination {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .letter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      border: 1px solid rgba(244, 114, 182, 0.25);
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-dark);
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .letter-btn:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.1));
+      box-shadow: 0 12px 34px rgba(236, 72, 153, 0.18);
+      color: var(--pink-600);
+    }
+
+    .letter-btn.primary {
+      color: white;
+      background: linear-gradient(135deg, var(--pink-400), var(--pink-500));
+      border-color: rgba(236, 72, 153, 0.35);
+      box-shadow: 0 12px 34px rgba(236, 72, 153, 0.35);
+    }
+
+    .letter-btn.primary:hover {
+      background: linear-gradient(135deg, var(--pink-500), var(--pink-600));
+      color: white;
+    }
+
+    @media (max-width: 520px) {
+      .letter-pagination {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .letter-btn {
+        width: 100%;
+      }
+    }
+
     .coming-soon {
       display: flex;
       flex-direction: column;
@@ -483,6 +540,11 @@
             Aakrist N.
             
             </p>
+
+          <div class="letter-pagination" aria-label="Letter navigation">
+            <a class="letter-btn" href="home.html">← Previous</a>
+            <a class="letter-btn primary" href="albums.html">Next →</a>
+          </div>
         </div>
       </div>
     </main>
