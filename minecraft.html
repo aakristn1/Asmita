@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Minecraft Collection</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at top, #ffe1ef 0%, #fff5fa 50%, #fef1f7 100%);
+      color: #3b2d31;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      letter-spacing: 0.04em;
+    }
+
+    p.lede {
+      max-width: 680px;
+      margin: 1.25rem auto 2.5rem;
+      line-height: 1.7;
+      color: #5b3d44;
+    }
+
+    main {
+      flex: 1;
+      width: min(1100px, 94vw);
+      margin: 0 auto 3rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    figure {
+      margin: 0;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 240px;
+    }
+
+    figcaption {
+      padding: 1.25rem 1.4rem 1.6rem;
+      line-height: 1.5;
+      color: #5f4148;
+      font-size: 0.98rem;
+    }
+
+    .back {
+      display: inline-flex;
+      margin: 2.5rem auto 3.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      background: #ff7aa4;
+      color: #fff7fb;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 12px 26px rgba(255, 122, 164, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .back:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(255, 122, 164, 0.45);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Our Minecraft Collection</h1>
+    <p class="lede">
+      Every screenshot is one of our tiny love letters—proof that even in a blocky world we chose
+      to build something soft, deliberate, and ours.
+    </p>
+  </header>
+  <main>
+    <div class="gallery">
+      <figure>
+        <img src="minecraft%20pictures/IMG_4596.JPG" alt="Glass tunnel leading to an axolotl aquarium">
+        <figcaption>The glass tunnel leading to the axolotl aquarium, lava glow above and our pets waiting on the right.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4597.JPG" alt="Magenta hallway lined with cats">
+        <figcaption>The bubblegum hallway where the cats stretch out along the magenta seats, turning a corridor into a lounge.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4598.JPG" alt="Pink storage room full of chests and flowers">
+        <figcaption>Our cherry storage room with chests stacked like presents, petals on the walls, and a sleepy cat guarding the loot.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4599.JPG" alt="Bridge looking toward a cottage and cherry tree">
+        <figcaption>The bridge view that sold us on this valley: cottage, fields, and that perfect pink cherry tree by the pond.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4600.JPG" alt="Loft bedroom with bunk beds and cats">
+        <figcaption>The loft bedroom with the coziest ceiling beams, twin red pillows, and cats guarding the ladder to our bunk.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4601.JPG" alt="Aquarium framed by stone pillars">
+        <figcaption>The same aquarium from the far side, coral reef colours framed by stone pillars and torchlight.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4602.JPG" alt="Stable interior with a donkey and cat tower">
+        <figcaption>The stable interior: a gentle donkey, a cat tree full of sleepy fuzzballs, and flower boxes in every window.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4603.JPG" alt="Pasture with pigs, armored horse, and llamas">
+        <figcaption>Beautiful sunrise, sparkly horse armor, loyal llamas, and our spoiled pigs sunbathing beside the barn.</figcaption>
+      </figure>
+      <figure>
+        <img src="minecraft%20pictures/IMG_4604.JPG" alt="Aerial view of the entire base and cherry grove">
+        <figcaption>The aerial shot that captures everything we planted here, from the cherry blossoms to the farms and aquarium. Our lifes work all in one place.</figcaption>
+      </figure>
+    </div>
+    <a class="back" href="dont-hate.html">← Back to the soft page</a>
+  </main>
+  <script>
+    // Redirect to index.html if accessed directly (no referrer from this site)
+    const referrer = document.referrer;
+    const isFromSite = referrer && (referrer.includes('home.html') || referrer.includes('albums.html') || referrer.includes('dont-hate.html'));
+    
+    if (!isFromSite && !sessionStorage.getItem('allowMinecraft')) {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
+

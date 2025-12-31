@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dedicated to you, Asmita.</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      background: radial-gradient(circle at top, #ffe0ec 0%, #fef9fb 45%, #faf4f8 100%);
+      color: #333;
+    }
+
+    .card {
+      width: min(540px, 92vw);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+      padding: 3rem clamp(1.8rem, 5vw, 3rem);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      margin: 0 0 1.5rem;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      letter-spacing: 0.05em;
+    }
+
+    .hint {
+      color: #666;
+      margin-bottom: 2.25rem;
+      line-height: 1.6;
+    }
+
+    .hint strong {
+      color: #ff7aa4;
+      font-weight: 700;
+    }
+
+    form {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr max-content;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .input-group:focus-within {
+      border-color: #ff9bbb;
+      box-shadow: 0 0 0 3px rgba(255, 154, 187, 0.25);
+    }
+
+    input {
+      padding: 0.9rem 1.1rem;
+      border: none;
+      font-size: 1.05rem;
+      text-align: center;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+      outline: none;
+      background: transparent;
+    }
+
+    .toggle {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      transition: color 0.2s ease;
+    }
+
+    .toggle:hover {
+      color: #ff7aa4;
+    }
+
+    .toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 0.95rem;
+      border-radius: 999px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ff7aa4, #ff97b9);
+      color: #fff7fc;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 28px rgba(255, 122, 164, 0.35);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(255, 122, 164, 0.45);
+    }
+
+    .message {
+      min-height: 1.2rem;
+      font-size: 0.95rem;
+      color: #d84c69;
+    }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <h1>Dedicated to you, Asmita.</h1>
+    <p class="hint">
+      Hint: The day we became official.<br>
+      Please format it like this: <strong>02/10/2003 → 02102003</strong>
+    </p>
+    <form id="access-form" novalidate>
+      <div class="input-group">
+        <input
+          id="password"
+          type="password"
+          inputmode="numeric"
+          autocomplete="off"
+          placeholder="Enter the secret"
+          aria-label="Enter password"
+          required
+        >
+        <button
+          type="button"
+          id="toggle-visibility"
+          class="toggle"
+          aria-label="Show password"
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M1.5 12s3.5-7 10.5-7 10.5 7 10.5 7-3.5 7-10.5 7-10.5-7-10.5-7z"></path>
+            <circle cx="12" cy="12" r="3.5"></circle>
+          </svg>
+        </button>
+      </div>
+      <button type="submit">Open our memories</button>
+      <div id="message" class="message"></div>
+    </form>
+  </section>
+
+  <script>
+    const form = document.getElementById('access-form');
+    const passwordInput = document.getElementById('password');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = passwordInput.value.trim();
+
+      if (value === '19122023') {
+        window.location.href = 'home.html';
+      } else {
+        message.textContent = 'That does not feel like the right date. Try again?';
+        passwordInput.focus();
+      }
+    });
+
+    const toggleButton = document.getElementById('toggle-visibility');
+
+    toggleButton.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      toggleButton.setAttribute('aria-pressed', String(isPassword));
+      toggleButton.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+    });
+  </script>
+</body>
+</html>
+

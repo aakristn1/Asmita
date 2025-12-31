@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>If you dont hate me</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #fff7fb;
+      color: #3a2a2f;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .bg-collage {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+      padding: 18px;
+      opacity: 0.35;
+      filter: saturate(1.05);
+      pointer-events: none;
+    }
+
+    .bg-collage img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+      display: block;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at top, rgba(255, 214, 231, 0.42), rgba(255, 247, 251, 0.72));
+      backdrop-filter: blur(1.5px);
+      pointer-events: none;
+    }
+
+    header {
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+      letter-spacing: 0.06em;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .card {
+      max-width: 680px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: clamp(2rem, 5vw, 3.2rem);
+      border-radius: 26px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      box-shadow: 0 18px 45px rgba(255, 154, 187, 0.35);
+    }
+
+    .card p {
+      margin: 0 0 1.6rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .playlist {
+      margin: 2rem 0 2.5rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .track {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 18px rgba(213, 68, 120, 0.15);
+    }
+
+    .collection {
+      margin: 2.5rem 0 0;
+      padding: 1.5rem;
+      border-radius: 20px;
+      background: rgba(255, 230, 240, 0.75);
+      text-align: center;
+      box-shadow: 0 10px 28px rgba(255, 122, 164, 0.2);
+    }
+
+    .collection p {
+      margin: 0.4rem 0 1.6rem;
+      color: #5b3c43;
+    }
+
+    .collection-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      background: #ff7aa4;
+      color: #fff7fb;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 12px 26px rgba(255, 122, 164, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .collection-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(255, 122, 164, 0.45);
+    }
+
+    a.back {
+      display: inline-flex;
+      margin-top: 2.5rem;
+      align-items: center;
+      gap: 0.5rem;
+      color: #d54478;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-collage" aria-hidden="true"></div>
+  <div class="bg-overlay" aria-hidden="true"></div>
+  <header>
+    <h1>If you don’t hate me…</h1>
+  </header>
+  <main>
+    <div class="card">
+      <div class="playlist">
+        <audio class="track" controls preload="auto">
+          <source src="assets/audio/Player%20-%20Baby%20Come%20Back.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <audio class="track" controls preload="auto">
+          <source src="assets/audio/Bruno%20Mars%20-%20When%20I%20Was%20Your%20Man%20(Official%20Music%20Video).mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <audio class="track" controls preload="auto">
+          <source src="assets/audio/Justin%20Timberlake%20-%20Mirrors%20(Official%20Video).mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <p>
+        Maybe today feels gentler. Maybe the storm finally slowed down enough for us to breathe
+        again. I hope you know how grateful I am for every moment you choose to stay.
+      </p>
+      <p>
+        Loving you is the best thing I’ve ever done. It’s the calm in my chest, the warmth I reach
+        for when everything else feels cold. Thank you for letting me try again, try better, try
+        always for you.
+      </p>
+      <p>
+        Let’s keep building the story that belongs to us. I’m still holding your hand, even when you
+        can’t feel it.
+      </p>
+      <div class="collection">
+        <h2>Our Minecraft collection</h2>
+        <p>A little museum of the worlds we built together. Ready to reminisce?</p>
+        <a class="collection-link" href="minecraft.html">Open the gallery</a>
+      </div>
+    </div>
+  </main>
+  <script>
+    const players = Array.from(document.querySelectorAll('.track'));
+
+    players.forEach((player) => {
+      player.addEventListener('play', () => {
+        players.forEach((other) => {
+          if (other !== player && !other.paused) {
+            other.pause();
+          }
+        });
+      });
+    });
+    // Build static collage background from JPGs in Pictures of us/jpg
+    const collage = document.querySelector('.bg-collage');
+    const collageImages = [
+      'Pictures%20of%20us/jpg/984BEF01-2334-4D09-8527-65160FF53E4C.JPG',
+      'Pictures%20of%20us/jpg/DSCN2337.jpg',
+      'Pictures%20of%20us/jpg/DSCN2434.jpg',
+      'Pictures%20of%20us/jpg/IMG_0245.jpg',
+      'Pictures%20of%20us/jpg/IMG_0450.jpg',
+      'Pictures%20of%20us/jpg/IMG_0758.jpg',
+      'Pictures%20of%20us/jpg/IMG_0768.jpg',
+      'Pictures%20of%20us/jpg/IMG_0777.jpg',
+      'Pictures%20of%20us/jpg/IMG_1162.JPG',
+      'Pictures%20of%20us/jpg/IMG_1163.JPG',
+      'Pictures%20of%20us/jpg/IMG_1177.jpg',
+      'Pictures%20of%20us/jpg/IMG_1449.JPG',
+      'Pictures%20of%20us/jpg/IMG_1725.jpg',
+      'Pictures%20of%20us/jpg/IMG_1775.jpg',
+      'Pictures%20of%20us/jpg/IMG_2050.jpg',
+      'Pictures%20of%20us/jpg/IMG_2437.jpg',
+      'Pictures%20of%20us/jpg/IMG_5296.jpg',
+      'Pictures%20of%20us/jpg/IMG_5721.jpg',
+      'Pictures%20of%20us/jpg/IMG_5844.jpg',
+      'Pictures%20of%20us/jpg/IMG_5912.jpg',
+      'Pictures%20of%20us/jpg/IMG_5923.jpg',
+      'Pictures%20of%20us/jpg/IMG_5933.jpg',
+      'Pictures%20of%20us/jpg/IMG_5987.jpg',
+      'Pictures%20of%20us/jpg/IMG_6018.jpg',
+      'Pictures%20of%20us/jpg/IMG_6372.JPG',
+      'Pictures%20of%20us/jpg/IMG_6502.jpg',
+      'Pictures%20of%20us/jpg/IMG_6576.JPG',
+      'Pictures%20of%20us/jpg/IMG_6601.JPG',
+      'Pictures%20of%20us/jpg/IMG_6819.JPG',
+      'Pictures%20of%20us/jpg/IMG_6820.jpg',
+      'Pictures%20of%20us/jpg/IMG_6856.jpg',
+      'Pictures%20of%20us/jpg/IMG_7101.jpg',
+      'Pictures%20of%20us/jpg/IMG_7151.jpg',
+      'Pictures%20of%20us/jpg/IMG_7209.jpg',
+      'Pictures%20of%20us/jpg/IMG_7213.jpg',
+      'Pictures%20of%20us/jpg/IMG_7309.jpg',
+      'Pictures%20of%20us/jpg/IMG_7461.jpg',
+      'Pictures%20of%20us/jpg/IMG_7502.jpg',
+      'Pictures%20of%20us/jpg/IMG_7825.jpg',
+      'Pictures%20of%20us/jpg/IMG_7915.jpg',
+      'Pictures%20of%20us/jpg/IMG_8019.jpg',
+      'Pictures%20of%20us/jpg/IMG_8103.jpg',
+      'Pictures%20of%20us/jpg/IMG_8125.jpg',
+      'Pictures%20of%20us/jpg/IMG_8418.jpg',
+      'Pictures%20of%20us/jpg/IMG_8883.jpg',
+      'Pictures%20of%20us/jpg/IMG_8937.jpg',
+      'Pictures%20of%20us/jpg/IMG_9055.jpg',
+      'Pictures%20of%20us/jpg/IMG_9101.jpg',
+      'Pictures%20of%20us/jpg/IMG_9455.jpg',
+      'Pictures%20of%20us/jpg/IMG_9899.jpg',
+      'Pictures%20of%20us/jpg/IMG_9913.jpg'
+    ];
+
+    collageImages.forEach((src) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      collage.appendChild(img);
+    });
+  </script>
+</body>
+</html>
+
